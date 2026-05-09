@@ -73,9 +73,11 @@ ticket.addEventListener('animationend', e => {
 function startNudging() {
   setInterval(() => {
     if (isDragging) return;
+    ticket.style.animation = '';
     ticket.classList.add('nudging');
     ticket.addEventListener('animationend', () => {
       ticket.classList.remove('nudging');
+      ticket.style.animation = 'none';
     }, { once: true });
   }, 3000);
 }
