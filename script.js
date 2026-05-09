@@ -62,6 +62,12 @@ setInterval(() => goToSlide(currentSlide + 1), SLIDE_INTERVAL);
 const ticket = document.getElementById('ticket');
 const THRESHOLD = 120;
 
+// Nach popIn-Animation: Animation entfernen damit JS-Transform greift
+ticket.addEventListener('animationend', () => {
+  ticket.style.animation = 'none';
+  ticket.style.transform = 'translate(-50%, -50%)';
+}, { once: true });
+
 let isDragging = false;
 let startX = 0, startY = 0;
 let currentX = 0, currentY = 0;
