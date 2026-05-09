@@ -63,10 +63,22 @@ const ticket = document.getElementById('ticket');
 const THRESHOLD = 120;
 
 // Nach popIn-Animation: Animation entfernen damit JS-Transform greift
-ticket.addEventListener('animationend', () => {
+ticket.addEventListener('animationend', e => {
+  if (e.animationName !== 'popIn') return;
   ticket.style.animation = 'none';
   ticket.style.transform = 'translate(-50%, -50%)';
+  startNudging();
 }, { once: true });
+
+function startNudging() {
+  setInterval(() => {
+    if (isDragging) return;
+    ticket.classList.add('nudging');
+    ticket.addEventListener('animationend', () => {
+      ticket.classList.remove('nudging');
+    }, { once: true });
+  }, 3000);
+}
 
 let isDragging = false;
 let startX = 0, startY = 0;
