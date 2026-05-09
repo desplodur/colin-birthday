@@ -152,3 +152,17 @@ ticket.addEventListener('touchend', onEnd);
 ticket.addEventListener('mousedown', e => onStart(e.clientX, e.clientY));
 document.addEventListener('mousemove', e => onMove(e.clientX, e.clientY));
 document.addEventListener('mouseup', onEnd);
+
+// ── Karussell-Swipe (Hintergrund) ────────────────────────
+let carouselSwipeStartX = 0;
+
+document.addEventListener('touchstart', e => {
+  if (e.target.closest('#ticket')) return;
+  carouselSwipeStartX = e.touches[0].clientX;
+}, { passive: true });
+
+document.addEventListener('touchend', e => {
+  if (e.target.closest('#ticket')) return;
+  const dx = e.changedTouches[0].clientX - carouselSwipeStartX;
+  if (Math.abs(dx) > 40) goToSlide(currentSlide + (dx < 0 ? 1 : -1));
+}, { passive: true });
