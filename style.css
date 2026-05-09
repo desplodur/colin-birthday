@@ -1,0 +1,239 @@
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background: #111;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+}
+
+/* ── Karussell ───────────────────────────────────────────── */
+#carousel {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+}
+
+#carousel-slides {
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+
+#carousel-slides img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0;
+  transition: opacity 1s ease;
+}
+
+#carousel-slides img.active {
+  opacity: 1;
+}
+
+#carousel-dots {
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 6px;
+  z-index: 2;
+}
+
+.dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.4);
+  transition: all 0.3s;
+}
+
+.dot.active {
+  background: white;
+  width: 18px;
+  border-radius: 3px;
+}
+
+/* ── Overlay ─────────────────────────────────────────────── */
+#overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 1;
+  background: rgba(0, 0, 0, 0.38);
+}
+
+/* ── Ticket ──────────────────────────────────────────────── */
+#ticket {
+  position: fixed;
+  z-index: 10;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: min(85vw, 300px);
+  border-radius: 16px;
+  filter: drop-shadow(0 16px 48px rgba(0, 0, 0, 0.75));
+  cursor: grab;
+  touch-action: none;
+  user-select: none;
+  animation: popIn 0.4s ease-out forwards;
+}
+
+@keyframes popIn {
+  from { transform: translate(-50%, -50%) scale(0.75); opacity: 0; }
+  to   { transform: translate(-50%, -50%) scale(1);    opacity: 1; }
+}
+
+#ticket.dragging {
+  cursor: grabbing;
+  transition: none !important;
+}
+
+#ticket.returning {
+  transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+#ticket.flying-out {
+  transition: transform 0.45s ease-in, opacity 0.45s ease-in;
+  opacity: 0;
+}
+
+/* Hauptteil */
+#ticket-main {
+  background: white;
+  border-radius: 16px 16px 0 0;
+  overflow: hidden;
+}
+
+#ticket-header {
+  background: linear-gradient(90deg, #ff6b6b, #feca57, #ff9ff3);
+  padding: 12px 18px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+#ticket-label {
+  color: white;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 2px;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+#ticket-body {
+  padding: 18px 20px 16px;
+}
+
+.ticket-sublabel {
+  font-size: 9px;
+  color: #aaa;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  margin-bottom: 3px;
+}
+
+#ticket-desc {
+  font-size: 13px;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 12px;
+}
+
+#ticket-amount {
+  font-size: 40px;
+  font-weight: 900;
+  color: #ff6b6b;
+  line-height: 1;
+  margin-bottom: 14px;
+}
+
+#ticket-from {
+  font-size: 10px;
+  color: #999;
+  border-top: 1px dashed #eee;
+  padding-top: 10px;
+  margin-bottom: 14px;
+}
+
+#ticket-barcode {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: #f7f7f7;
+  border-radius: 8px;
+  padding: 8px 12px;
+}
+
+#barcode-label {
+  font-size: 8px;
+  color: #bbb;
+  letter-spacing: 1px;
+  font-family: monospace;
+}
+
+/* Notches (Zackenlöcher) */
+#ticket-notch-left,
+#ticket-notch-right {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  background: rgba(0, 0, 0, 0.6);
+  border-radius: 50%;
+  top: calc(100% - 64px - 10px);
+}
+
+#ticket-notch-left  { left:  -10px; }
+#ticket-notch-right { right: -10px; }
+
+/* Stub */
+#ticket-stub {
+  background: white;
+  border-radius: 0 0 16px 16px;
+  border-top: 2px dashed #e0e0e0;
+  padding: 14px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  height: 64px;
+}
+
+#stub-text {
+  font-size: 11px;
+  letter-spacing: 3px;
+  color: #aaa;
+  text-transform: uppercase;
+}
+
+#stub-emoji, #stub-emoji2 {
+  font-size: 22px;
+}
+
+/* ── Swipe-Hinweis ───────────────────────────────────────── */
+#swipe-hint {
+  position: fixed;
+  z-index: 11;
+  bottom: 52px;
+  left: 50%;
+  transform: translateX(-50%);
+  color: rgba(255, 255, 255, 0.65);
+  font-size: 11px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  pointer-events: none;
+  animation: fadeHint 0.5s ease 3s forwards;
+  white-space: nowrap;
+}
+
+@keyframes fadeHint {
+  to { opacity: 0; }
+}
