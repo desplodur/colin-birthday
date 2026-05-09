@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <title>Happy Birthday!</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Karussell -->
+  <div id="carousel">
+    <div id="carousel-slides"></div>
+    <div id="carousel-dots"></div>
+  </div>
+
+  <!-- Dunkles Overlay -->
+  <div id="overlay"></div>
+
+  <!-- Gutschein Ticket -->
+  <div id="ticket">
+    <div id="ticket-main">
+      <div id="ticket-header">
+        <span id="ticket-label">GEBURTSTAGS-GUTSCHEIN</span>
+        <span>🎉</span>
+      </div>
+      <div id="ticket-body">
+        <div class="ticket-sublabel">Einzulösen für</div>
+        <div id="ticket-desc">Klamotten oder frei wählbare Spaßmittel</div>
+        <div id="ticket-amount">60 €</div>
+        <div id="ticket-from">Von Astralryk · Hanni Krawalli · Schlaurenz</div>
+        <div id="ticket-barcode">
+          <svg id="barcode-svg" height="32" xmlns="http://www.w3.org/2000/svg"></svg>
+          <span id="barcode-label">HBD-60EUR-2025</span>
+        </div>
+      </div>
+    </div>
+    <div id="ticket-notch-left"></div>
+    <div id="ticket-notch-right"></div>
+    <div id="ticket-stub">
+      <span id="stub-emoji">🎂</span>
+      <span id="stub-text">Happy Birthday</span>
+      <span id="stub-emoji2">🥳</span>
+    </div>
+  </div>
+
+  <!-- Swipe-Hinweis -->
+  <div id="swipe-hint">← wischen →</div>
+
+  <script src="script.js"></script>
+</body>
+</html>
